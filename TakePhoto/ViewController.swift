@@ -32,6 +32,40 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         // check if the file exists
         // if not create directoty
         
+        let filemgr = FileManager.default
+        let dirPaths = filemgr.urls(for: .documentDirectory, in: .userDomainMask)
+        
+        let docsURL = dirPaths[0]
+        
+        let newDir = docsURL.appendingPathComponent("ImagePicker").path
+        
+        var objcbool: ObjCBool = true
+        print(docsURL)
+        let isExist = filemgr.fileExists(atPath: newDir, isDirectory: &objcbool)
+        
+        if isExist == false{
+            do{
+                try filemgr.createDirectory(atPath: newDir, withIntermediateDirectories: true, attributes: nil)
+                print("File created")
+                // check the path exists 
+                print(newDir)
+            }catch let error as NSError{
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+        else{
+            print("Exist already")
+            do{
+                let fileList = try filemgr.contentsOfDirectory(atPath: "/")
+                for filename in fileList{
+                    print(filename)
+            }
+        }catch let error as NSError{
+           print("Error: \(error.localizedDescription)")
+        }
+        
+        }
+        
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
