@@ -18,10 +18,14 @@
 
 import UIKit
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
+    
+    // need an imagePicker controller
+    // string directory to the path
+    // array of images
+    // newDir string
     
     var imagePicker: UIImagePickerController!
-    
     var imagesDirectoyPath: String!
     var images: [UIImage]!
     var titles: [String]!
